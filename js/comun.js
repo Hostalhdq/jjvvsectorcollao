@@ -34,7 +34,7 @@ function pintarEncabezado() {
   encabezado.innerHTML = `
     <a class="saltar" href="#contenido">Saltar al contenido</a>
     <div class="contenedor">
-      <a class="marca" href="index.html">Collao Unido<small>11 juntas de vecinos, una sola voz</small></a>
+      <a class="marca" href="index.html">Collao Unido<small>12 juntas de vecinos, una sola voz</small></a>
       <button class="boton-menu" aria-expanded="false" aria-controls="menu">Menú ☰</button>
       <nav id="menu" class="menu" aria-label="Menú principal"><ul>${enlaces}</ul></nav>
     </div>`;
@@ -60,7 +60,7 @@ function pintarPie() {
     <div class="contenedor grilla grilla-2">
       <div>
         <strong>${escaparHTML(SITIO.nombre)}</strong>
-        <p>Las 11 juntas de vecinos de Collao, Concepción, trabajando juntas por un alcantarillado y una red de aguas lluvias que funcionen.</p>
+        <p>Las 12 juntas de vecinos de Collao, Concepción, trabajando juntas por un alcantarillado y una red de aguas lluvias que funcionen.</p>
         ${contacto ? `<p>${contacto}</p>` : ""}
       </div>
       <div>

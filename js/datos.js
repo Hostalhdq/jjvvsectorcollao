@@ -30,6 +30,7 @@ const JUNTAS = [
   { id: "jardines-de-collao", nombre: "Jardines de Collao", presidente: "", contacto: "", problemas: [] },
   { id: "lagos-de-chile", nombre: "Lagos de Chile", presidente: "", contacto: "", problemas: [] },
   { id: "parque-residencial-collao", nombre: "Parque Residencial Collao", presidente: "", contacto: "", problemas: ["Rebalses frente a la UBB (nota El Sur, 2022)"] },
+  { id: "parque-residencial-los-fresnos", nombre: "Parque Residencial Los Fresnos", presidente: "", contacto: "", problemas: ["Afectada por rebalses (nota El Sur, 2022)"] },
   { id: "plaza-acevedo", nombre: "Plaza Acevedo", presidente: "", contacto: "", problemas: [] },
   { id: "protejamos-los-lirios", nombre: "Protejamos los Lirios", presidente: "", contacto: "", problemas: ["Advertencia de capacidad de la red por proyecto de 452 departamentos (2023)"] },
   { id: "puertas-del-mar", nombre: "Puertas del Mar", presidente: "", contacto: "", problemas: [] },
@@ -97,7 +98,7 @@ const HISTORIA = [
   { anio: "Noviembre 2022", titulo: "Compromiso de 1.000 metros de cañerías", texto: "Essbio se compromete a cambiar 1.000 m de cañerías entre Los Lirios y Nonguén, junto con la reconstrucción de la calle.", fuente: "Actas de reuniones 2022" },
   { anio: "2023", titulo: "Advertencia por proyecto de 452 departamentos", texto: "La junta Protejamos los Lirios advierte que la red no tiene capacidad para un nuevo proyecto de 452 departamentos.", fuente: "Junta de vecinos Protejamos los Lirios" },
   { anio: "2025–2026", titulo: "Colector obstruido en Villa Huáscar", texto: "Se reporta la obstrucción del colector de aguas lluvias.", fuente: "Junta de vecinos Villa Huáscar" },
-  { anio: "Octubre 2026", titulo: "Nace la Coordinadora", texto: "Las 11 juntas de vecinos de Collao se unen para hablar con una sola voz y fijan una meta de 12 meses.", fuente: "Coordinadora de Juntas de Vecinos de Collao", destacado: true },
+  { anio: "Octubre 2026", titulo: "Nace la Coordinadora", texto: "Las 12 juntas de vecinos de Collao se unen para hablar con una sola voz y fijan una meta de 12 meses.", fuente: "Coordinadora de Juntas de Vecinos de Collao", destacado: true },
   { anio: "Septiembre 2027", titulo: "Meta", texto: "Plazo que se fija la Coordinadora para tener resuelto el problema o con obras comprometidas y en ejecución.", fuente: "" },
 ];
 

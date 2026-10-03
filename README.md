@@ -1,6 +1,6 @@
 # Collao Unido · Coordinadora de Juntas de Vecinos de Collao
 
-Sitio web de las 11 juntas de vecinos de Collao (Concepción) para resolver juntas el
+Sitio web de las 12 juntas de vecinos de Collao (Concepción) para resolver juntas el
 problema de alcantarillado y aguas lluvias del sector. Meta: octubre 2026 a septiembre 2027.
 
 Sitio en HTML, CSS y JavaScript simples, sin compilación: liviano, rápido en celulares
@@ -77,7 +77,6 @@ Para guardarlos en línea y que aparezcan en el mapa y los contadores:
 
 - [ ] Nombre definitivo y dominio.
 - [ ] Presidente/a y contacto de cada junta.
-- [ ] Confirmar si se suma la JJVV Los Fresnos.
 - [ ] Correo y WhatsApp de la Coordinadora.
 - [ ] Subir los documentos (Plan Maestro, actas, fallo, notas, ficha, catastro).
 - [ ] Configurar Firebase y subida de fotos (Firebase Storage).
