@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las juntas · Collao Unido</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header id="encabezado"></header>
+
+  <main id="contenido">
+    <div class="titulo-pagina">
+      <div class="contenedor">
+        <h1>Las 11 juntas de vecinos</h1>
+        <p>Una sola voz por cerca de 35 mil habitantes de Collao.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="contenedor">
+        <div id="juntas" class="grilla grilla-3"></div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="contenedor">
+        <h2>Calendario de reuniones</h2>
+        <p>Próximamente publicaremos aquí las fechas de las reuniones de la Coordinadora y de la mesa técnica.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie"></footer>
+
+  <script src="js/datos.js"></script>
+  <script src="js/comun.js"></script>
+  <script>
+    document.getElementById("juntas").innerHTML = JUNTAS.map((j) => `
+      <article class="tarjeta" id="${j.id}">
+        <h2 style="font-size:1.2rem">${escaparHTML(j.nombre)}</h2>
+        <p><strong>Presidente/a:</strong> ${j.presidente ? escaparHTML(j.presidente) : "<span class='ayuda'>Por confirmar</span>"}</p>
+        ${j.contacto ? `<p><strong>Contacto:</strong> ${escaparHTML(j.contacto)}</p>` : ""}
+        <p><strong>Problemas conocidos:</strong></p>
+        ${j.problemas.length
+          ? `<ul>${j.problemas.map((p) => `<li>${escaparHTML(p)}</li>`).join("")}</ul>`
+          : `<p class="ayuda">Por completar. <a href="reportar.html">Reporta un rebalse</a> para sumar evidencia.</p>`}
+      </article>`).join("");
+  </script>
+</body>
+</html>

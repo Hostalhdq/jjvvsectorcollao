@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compromisos y seguimiento · Collao Unido</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header id="encabezado"></header>
+
+  <main id="contenido">
+    <div class="titulo-pagina">
+      <div class="contenedor">
+        <h1>Compromisos y seguimiento</h1>
+        <p>Lo que prometió cada institución, cuándo lo prometió y en qué está. Se actualiza después de cada reunión de la mesa.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="contenedor">
+        <div id="contadores" class="grilla grilla-4" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="contenedor">
+        <label for="f-inst">Filtrar por institución</label>
+        <select id="f-inst" style="max-width:360px;margin-bottom:20px"></select>
+        <div class="tabla-envoltorio">
+          <table class="apilada">
+            <thead>
+              <tr><th>Compromiso</th><th>Institución</th><th>Se comprometió</th><th>Plazo</th><th>Estado</th></tr>
+            </thead>
+            <tbody id="tabla"></tbody>
+          </table>
+        </div>
+        <p class="aviso aviso-info">¿Tienes información sobre alguno de estos compromisos? Avisa a la directiva de tu junta para verificarlo.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie"></footer>
+
+  <script src="js/datos.js"></script>
+  <script src="js/comun.js"></script>
+  <script>
+    const filtro = document.getElementById("f-inst");
+    const instituciones = [...new Set(["Essbio", "SERVIU", "DOH", "Municipio"].concat(COMPROMISOS.map((c) => c.institucion)))];
+    filtro.innerHTML = '<option value="">Todas</option>' + instituciones.map((i) => `<option>${escaparHTML(i)}</option>`).join("");
+
+    function pintarTabla() {
+      const filas = COMPROMISOS.filter((c) => !filtro.value || c.institucion === filtro.value);
+      document.getElementById("tabla").innerHTML = filas.length ? filas.map((c) => `
+        <tr>
+          <td data-etiqueta="Compromiso"><strong>${escaparHTML(c.compromiso)}</strong></td>
+          <td data-etiqueta="Institución">${escaparHTML(c.institucion)}</td>
+          <td data-etiqueta="Se comprometió">${escaparHTML(c.fecha)}</td>
+          <td data-etiqueta="Plazo">${escaparHTML(c.plazo)}</td>
+          <td data-etiqueta="Estado"><span class="estado estado-${escaparHTML(c.estado)}">${escaparHTML(c.textoEstado)}</span></td>
+        </tr>`).join("")
+        : `<tr><td colspan="5">Aún no hay compromisos registrados de esta institución.</td></tr>`;
+    }
+    filtro.addEventListener("change", pintarTabla);
+    pintarTabla();
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentos · Collao Unido</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header id="encabezado"></header>
+
+  <main id="contenido">
+    <div class="titulo-pagina">
+      <div class="contenedor">
+        <h1>Documentos</h1>
+        <p>Estudios oficiales, fallos, notas de prensa, actas, oficios enviados y respuestas recibidas.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="contenedor">
+        <label for="f-cat">Categoría</label>
+        <select id="f-cat" style="max-width:360px;margin-bottom:20px"></select>
+        <div id="lista" class="grilla grilla-2"></div>
+        <p class="aviso">De las notas de prensa publicamos un resumen propio y el enlace a la fuente original, respetando los derechos de autor.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie"></footer>
+
+  <script src="js/datos.js"></script>
+  <script src="js/comun.js"></script>
+  <script>
+    const filtro = document.getElementById("f-cat");
+    const categorias = [...new Set(DOCUMENTOS.map((d) => d.categoria).concat(["Oficios enviados", "Respuestas recibidas"]))];
+    filtro.innerHTML = '<option value="">Todas</option>' + categorias.map((c) => `<option>${escaparHTML(c)}</option>`).join("");
+
+    function pintarDocs() {
+      const docs = DOCUMENTOS.filter((d) => !filtro.value || d.categoria === filtro.value);
+      document.getElementById("lista").innerHTML = docs.length ? docs.map((d) => `
+        <article class="tarjeta">
+          <p class="paso">${escaparHTML(d.categoria)} · ${escaparHTML(d.anio)}</p>
+          <h2 style="font-size:1.1rem">${escaparHTML(d.titulo)}</h2>
+          <p>${escaparHTML(d.aporta)}</p>
+          ${d.enlace
+            ? `<a class="boton boton-secundario" href="${escaparHTML(d.enlace)}" target="_blank" rel="noopener">Ver documento</a>`
+            : `<p class="ayuda">Documento en preparación</p>`}
+        </article>`).join("")
+        : `<p>Todavía no hay documentos en esta categoría.</p>`;
+    }
+    filtro.addEventListener("change", pintarDocs);
+    pintarDocs();
+  </script>
+</body>
+</html>

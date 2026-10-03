@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Historia · Collao Unido</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header id="encabezado"></header>
+
+  <main id="contenido">
+    <div class="titulo-pagina">
+      <div class="contenedor">
+        <h1>Historia: 25 años esperando</h1>
+        <p>Cronología 2001–2026, con el documento que respalda cada hito.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="contenedor" style="max-width:820px">
+        <ol id="cronologia" class="cronologia"></ol>
+        <p><a href="documentos.html">Ver todos los documentos →</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie"></footer>
+
+  <script src="js/datos.js"></script>
+  <script src="js/comun.js"></script>
+  <script>
+    document.getElementById("cronologia").innerHTML = HISTORIA.map((h) => `
+      <li${h.destacado ? ' class="destacado"' : ""}>
+        <span class="anio">${escaparHTML(h.anio)}</span>
+        <h2 style="font-size:1.15rem;margin:4px 0">${escaparHTML(h.titulo)}</h2>
+        <p style="margin:0 0 4px">${escaparHTML(h.texto)}</p>
+        ${h.fuente ? `<span class="fuente">Fuente: ${escaparHTML(h.fuente)}</span>` : ""}
+      </li>`).join("");
+  </script>
+</body>
+</html>

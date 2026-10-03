@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa de puntos críticos · Collao Unido</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header id="encabezado"></header>
+
+  <main id="contenido">
+    <div class="titulo-pagina">
+      <div class="contenedor">
+        <h1>Mapa de puntos críticos</h1>
+        <p>Cada rebalse reportado y cada punto conocido. Es la base del catastro para la mesa técnica.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="contenedor">
+        <div class="filtros">
+          <div><label for="f-junta">Junta</label><select id="f-junta"></select></div>
+          <div>
+            <label for="f-red">Tipo</label>
+            <select id="f-red">
+              <option value="">Todos</option>
+              <option value="alcantarillado">Alcantarillado</option>
+              <option value="aguas-lluvias">Aguas lluvias</option>
+            </select>
+          </div>
+          <div><label for="f-desde">Desde</label><input type="date" id="f-desde"></div>
+          <div><label for="f-hasta">Hasta</label><input type="date" id="f-hasta"></div>
+        </div>
+
+        <div class="leyenda">
+          <span class="l-alc">Alcantarillado (Essbio)</span>
+          <span class="l-all">Aguas lluvias (DOH / SERVIU / municipio)</span>
+        </div>
+        <p id="resumen-mapa" aria-live="polite"></p>
+
+        <div id="mapa"></div>
+
+        <p class="aviso aviso-info">🔒 Por privacidad, el mapa muestra la ubicación aproximada (la cuadra), nunca la dirección exacta ni el nombre de quien reporta.</p>
+        <p><a class="boton boton-rebalse" href="reportar.html">🚨 Reportar un rebalse</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie"></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/comun.js"></script>
+  <script src="js/mapa.js"></script>
+</body>
+</html>
