@@ -7,8 +7,8 @@
  */
 
 const SITIO = {
-  nombre: "Coordinadora de Juntas de Vecinos de Collao",
-  nombreCorto: "Collao Unido",
+  nombre: "Unión de Juntas de Vecinos del Sector Collao",
+  nombreCorto: "Sector Collao - Concepción",
   habitantes: "cerca de 35 mil",
   meta: "Resolver el problema de alcantarillado y aguas lluvias de Collao en 12 meses: octubre 2026 a septiembre 2027.",
   correo: "", // PENDIENTE: correo de contacto de la coordinadora
@@ -93,12 +93,12 @@ const HISTORIA = [
   { anio: "Noviembre 2022", titulo: "Compromiso de 1.000 metros de cañerías", texto: "Essbio se compromete a cambiar 1.000 m de cañerías entre Los Lirios y Nonguén, junto con la reconstrucción de la calle.", fuente: "Actas de reuniones 2022" },
   { anio: "2023", titulo: "Advertencia por proyecto de 452 departamentos", texto: "La junta Protejamos los Lirios advierte que la red no tiene capacidad para un nuevo proyecto de 452 departamentos.", fuente: "Junta de vecinos Protejamos los Lirios" },
   { anio: "2025–2026", titulo: "Colector obstruido en Villa Huáscar", texto: "Se reporta la obstrucción del colector de aguas lluvias.", fuente: "Junta de vecinos Villa Huáscar" },
-  { anio: "Octubre 2026", titulo: "Nace la Coordinadora", texto: "Las 12 juntas de vecinos de Collao se unen para hablar con una sola voz y fijan una meta de 12 meses.", fuente: "Coordinadora de Juntas de Vecinos de Collao", destacado: true },
-  { anio: "Septiembre 2027", titulo: "Meta", texto: "Plazo que se fija la Coordinadora para tener resuelto el problema o con obras comprometidas y en ejecución.", fuente: "" },
+  { anio: "Octubre 2026", titulo: "Nace la Unión de Juntas de Vecinos", texto: "Las 12 juntas de vecinos de Collao se unen para hablar con una sola voz y fijan una meta de 12 meses.", fuente: "Unión de Juntas de Vecinos del Sector Collao", destacado: true },
+  { anio: "Septiembre 2027", titulo: "Meta", texto: "Plazo que se fija la Unión de Juntas de Vecinos para tener resuelto el problema o con obras comprometidas y en ejecución.", fuente: "" },
 ];
 
 const NOVEDADES = [
-  { fecha: "Octubre 2026", titulo: "Lanzamos el sitio de la Coordinadora", texto: "Desde hoy puedes reportar cada rebalse desde tu celular. Cada reporte es evidencia." },
+  { fecha: "Octubre 2026", titulo: "Lanzamos el sitio de la Unión de Juntas de Vecinos", texto: "Desde hoy puedes reportar cada rebalse desde tu celular. Cada reporte es evidencia." },
 ];
 
 /* Puntos conocidos en el mapa (no son reportes de vecinos).

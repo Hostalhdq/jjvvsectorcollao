@@ -1,4 +1,4 @@
-# Collao Unido · Coordinadora de Juntas de Vecinos de Collao
+# Sector Collao - Concepción · Unión de Juntas de Vecinos del Sector Collao
 
 Sitio web de las 12 juntas de vecinos de Collao (Concepción) para resolver juntas el
 problema de alcantarillado y aguas lluvias del sector. Meta: octubre 2026 a septiembre 2027.
@@ -95,7 +95,7 @@ muestran en el mapa, se borran (botón "Borrar", no se puede deshacer) y se desc
 
 - [ ] Nombre definitivo y dominio.
 - [ ] Presidente/a y contacto de cada junta.
-- [ ] Correo y WhatsApp de la Coordinadora.
+- [ ] Correo y WhatsApp de la Unión de Juntas de Vecinos.
 - [ ] Subir los documentos (Plan Maestro, actas, fallo, notas, ficha, catastro).
 - [ ] Conectar la base de datos en Vercel y definir `ADMIN_CLAVE`.
 - [ ] Subida de fotos al sitio (por ejemplo con Vercel Blob).

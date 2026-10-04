@@ -44,7 +44,7 @@ function pintarEncabezado() {
   const contacto = [
     SITIO.whatsapp ? `<a href="https://wa.me/${escaparHTML(SITIO.whatsapp)}">${ICONOS.telefono} +${escaparHTML(SITIO.whatsapp)}</a>` : "",
     SITIO.correo ? `<a href="mailto:${escaparHTML(SITIO.correo)}">${ICONOS.correo} ${escaparHTML(SITIO.correo)}</a>` : "",
-    `<span>${ICONOS.ubicacion} Collao, Concepción</span>`,
+    `<span>${ICONOS.ubicacion} Región del Biobío</span>`,
     `<span>${ICONOS.grupo} ${JUNTAS.length} juntas de vecinos</span>`,
   ].filter(Boolean).join("");
 
@@ -57,7 +57,7 @@ function pintarEncabezado() {
       <div class="zona-marca">
         <a class="marca" href="index.html" aria-label="Inicio, ${escaparHTML(SITIO.nombre)}">
           ${ICONOS.logo}
-          <span><strong>Collao Unido</strong><small>Coordinadora de Juntas de Vecinos de Collao</small></span>
+          <span><strong>Sector Collao - Concepción</strong><small>Unión de Juntas de Vecinos del Sector Collao</small></span>
         </a>
         <div class="datos-contacto"><span class="separador" aria-hidden="true"></span>${contacto}</div>
       </div>
@@ -98,7 +98,7 @@ function pintarPie() {
     <div class="contenedor">
       <div class="pie-grilla">
         <div>
-          <div class="marca-pie">${ICONOS.logo} Collao Unido</div>
+          <div class="marca-pie">${ICONOS.logo} Sector Collao - Concepción</div>
           <p>${escaparHTML(SITIO.nombre)}. Las ${JUNTAS.length} juntas de vecinos de Collao, trabajando juntas por un alcantarillado y una red de aguas lluvias que funcionen.</p>
           <ul>${contacto}</ul>
         </div>

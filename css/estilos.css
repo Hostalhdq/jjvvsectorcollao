@@ -372,3 +372,8 @@ fieldset { border: 2px solid var(--borde); border-radius: var(--radio); padding:
 }
 .acciones-encabezado .boton-reportar-mini { display: none; }
 @media (min-width: 1080px) { .acciones-encabezado .boton-reportar-mini { display: inline-flex; } }
+.barra-superior { padding-block: 10px; }
+@media (max-width: 499px) {
+  .marca strong { font-size: 1rem; line-height: 1.15; }
+  .marca small { margin-top: 2px; }
+}

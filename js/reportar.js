@@ -72,7 +72,7 @@ function validar() {
 function textoReporte(r) {
   const llovia = { no: "No, estaba seco", poco: "Llovía poco", mucho: "Llovía fuerte" }[r.llovia];
   return [
-    "REPORTE DE REBALSE · Collao Unido",
+    "REPORTE DE REBALSE · Unión de Juntas de Vecinos del Sector Collao",
     `Fecha: ${r.fecha.replace("T", " ")}`,
     `Junta: ${nombreJunta(r.junta)}`,
     `Dirección: ${r.direccion}`,
@@ -141,7 +141,7 @@ form.addEventListener("submit", async (e) => {
       : "Los administradores lo revisarán y luego aparecerá en el mapa.")
       + (SITIO.whatsapp ? " Si tienes fotos o video, envíalos por WhatsApp con el botón de abajo." : "");
   } else {
-    detalle.textContent = "No pudimos conectarnos con el servidor, así que el reporte quedó guardado solo en este teléfono. Para que llegue a la Coordinadora, envíalo con uno de estos botones y adjunta tus fotos o video.";
+    detalle.textContent = "No pudimos conectarnos con el servidor, así que el reporte quedó guardado solo en este teléfono. Para que llegue a la Unión de Juntas de Vecinos, envíalo con uno de estos botones y adjunta tus fotos o video.";
   }
 
   if (SITIO.whatsapp) {
