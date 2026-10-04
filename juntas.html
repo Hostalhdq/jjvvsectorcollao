@@ -41,6 +41,7 @@
         <h2 style="font-size:1.2rem">${escaparHTML(j.nombre)}</h2>
         <p><strong>Presidente/a:</strong> ${j.presidente ? escaparHTML(j.presidente) : "<span class='ayuda'>Por confirmar</span>"}</p>
         ${j.contacto ? `<p><strong>Contacto:</strong> <a href="tel:${soloDigitos(j.contacto)}">${escaparHTML(j.contacto)}</a></p>` : ""}
+        ${j.sede ? `<p><strong>Sede:</strong> <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(j.sede + ", Concepción, Chile")}" target="_blank" rel="noopener">${escaparHTML(j.sede)}</a></p>` : ""}
         <p><strong>Problemas conocidos:</strong></p>
         ${j.problemas.length
           ? `<ul>${j.problemas.map((p) => `<li>${escaparHTML(p)}</li>`).join("")}</ul>`

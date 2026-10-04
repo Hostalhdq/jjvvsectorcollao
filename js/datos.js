@@ -21,7 +21,14 @@ const CENTRO_MAPA = { lat: -36.8195, lng: -73.0155, zoom: 15 };
 const JUNTAS = [
   { id: "collao-norte", nombre: "Collao Norte", presidente: "David Quiero", contacto: "", problemas: [] },
   { id: "estero-nonguen", nombre: "Estero Nonguén", presidente: "", contacto: "", problemas: [] },
-  { id: "ignacio-collao", nombre: "Ignacio Collao", presidente: "", contacto: "", problemas: ["Rebalses de cámaras (nota El Sur, 2022)"] },
+  {
+    id: "ignacio-collao", nombre: "Ignacio Collao", presidente: "Sandra Pérez Anabalón", contacto: "+56 9 9883 0822",
+    sede: "Inés de Suárez #65",
+    problemas: [
+      "Rebalses repetidos de cámaras de alcantarillado en Coronel José Seguel y la rotonda Los Abedules: seis eventos documentados entre abril y julio de 2022, varios en días sin lluvia",
+      "Según la SISS, la causa es una falla del emisario de Av. Collao con General Toro (2022)",
+    ],
+  },
   { id: "jardines-de-collao", nombre: "Jardines de Collao", presidente: "Mauricio Jara", contacto: "+56 9 9840 0418", problemas: [] },
   { id: "lagos-de-chile", nombre: "Lagos de Chile", presidente: "", contacto: "", problemas: [] },
   { id: "parque-residencial-collao", nombre: "Parque Residencial Collao", presidente: "", contacto: "", problemas: ["Rebalses frente a la UBB (nota El Sur, 2022)"] },
@@ -67,6 +74,22 @@ const COMPROMISOS = [
     estado: "incumplido",
     textoEstado: "Sin evidencia de ejecución",
   },
+  {
+    compromiso: "Corregir las fallas del sistema de recolección y hacer las obras de regularización (medidas instruidas por la SISS en el OF NC N° 2986/22)",
+    institucion: "Essbio",
+    fecha: "Octubre 2022",
+    plazo: "Sin plazo informado",
+    estado: "verificar",
+    textoEstado: "Por verificar",
+  },
+  {
+    compromiso: "Resolver el proceso de sanción contra Essbio por falta de continuidad del servicio (Expediente N° 5191)",
+    institucion: "SISS",
+    fecha: "Octubre 2022",
+    plazo: "Sin plazo informado",
+    estado: "verificar",
+    textoEstado: "Por verificar",
+  },
 ];
 
 /* Biblioteca de documentos. "enlace" vacío = documento aún no subido.
@@ -78,6 +101,8 @@ const DOCUMENTOS = [
   { titulo: "Actas de reuniones con Essbio (La Mochita y Villa Huáscar)", anio: "2022", categoria: "Actas de reuniones", aporta: "Compromisos de Essbio y su versión de las causas", enlace: "" },
   { titulo: "Nota El Sur: \"Residentes de Collao solicitan cambio de alcantarillado\"", anio: "2022", categoria: "Prensa", aporta: "La etapa 3 del Par Vial no incluye recambio; rebalses en días secos", enlace: "" },
   { titulo: "Ficha de Registro de Rebalse", anio: "2026", categoria: "Herramientas", aporta: "Base del formulario de reporte", enlace: "" },
+  { titulo: "Denuncia de la JJVV Ignacio Collao a la SISS por rebalses de alcantarillado", anio: "2022", categoria: "Oficios enviados", aporta: "Seis rebalses documentados con fotos entre abril y julio de 2022 en Coronel José Seguel y la rotonda Los Abedules, varios sin lluvia, y la falta de respuesta de Essbio. Recibida por la SISS el 13 de julio de 2022", enlace: "" },
+  { titulo: "Respuesta de la SISS al reclamo folio SAC N° 202223247", anio: "2022", categoria: "Respuestas recibidas", aporta: "La SISS confirma una falla del emisario de Av. Collao con General Toro, informa el proceso de sanción contra Essbio (Expediente N° 5191) y las medidas instruidas (OF NC N° 2986/22)", enlace: "" },
   { titulo: "Catastro de fallas de Essbio en Collao", anio: "2026", categoria: "Estudios propios", aporta: "Casos de prensa 2016–2026", enlace: "" },
 ];
 
@@ -88,11 +113,16 @@ const HISTORIA = [
   { anio: "2006", titulo: "Inundación de Collao", texto: "El sector se inunda gravemente.", fuente: "Fallo judicial", destacado: true },
   { anio: "2015", titulo: "Fallo: el Estado es condenado", texto: "La justicia condena al Estado por no ejecutar el plan de aguas lluvias. La Corte Suprema ratifica la responsabilidad.", fuente: "Fallo 2015 y Corte Suprema", destacado: true },
   { anio: "2017", titulo: "Refuerzo del muro del estero Nonguén", texto: "Se refuerza el muro del estero. Es una obra de estabilidad, no aumenta la capacidad de la red.", fuente: "Diario El Sur, 2017" },
+  { anio: "Abril a julio 2022", titulo: "Seis rebalses en Coronel José Seguel y Los Abedules", texto: "La JJVV Ignacio Collao documenta con fotos y videos seis eventos de rebalse de cámaras de alcantarillado (22 y 29 de abril, 22 de mayo, 3 y 18 de junio y 10 de julio). El 26 y el 29 de abril, el 18 de junio y el 10 de julio no llovía. Essbio da versiones distintas de la causa (una bomba y la planta elevadora de calle Diego de Oro) y en varias ocasiones no llega a terreno.", fuente: "Denuncia de la JJVV Ignacio Collao a la SISS, julio 2022" },
+  { anio: "Junio 2022", titulo: "Primer reclamo a la SISS", texto: "La JJVV Ignacio Collao reclama ante la Superintendencia de Servicios Sanitarios (folio SAC N° 202212058).", fuente: "Denuncia de la JJVV Ignacio Collao a la SISS, julio 2022" },
+  { anio: "Julio 2022", titulo: "Denuncia formal ante la SISS", texto: "La JJVV Ignacio Collao presenta una denuncia escrita con la cronología de los seis eventos. La SISS la recibe el 13 de julio de 2022.", fuente: "Denuncia de la JJVV Ignacio Collao a la SISS, julio 2022", destacado: true },
   { anio: "Septiembre 2022", titulo: "Reuniones con Essbio", texto: "En reuniones en La Mochita y Villa Huáscar, Essbio se compromete a cambiar redes frente a Terrazas de Collao y a entregar el resultado de una campaña de humo.", fuente: "Actas de reuniones 2022" },
   { anio: "2022", titulo: "Vecinos piden cambio de alcantarillado", texto: "Se informa que la etapa 3 del Par Vial no incluye recambio de alcantarillado. Vecinos denuncian rebalses incluso en días secos, en Ignacio Collao y frente a la UBB.", fuente: "Diario El Sur, 2022" },
+  { anio: "Octubre 2022", titulo: "La SISS confirma la falla y abre un proceso de sanción a Essbio", texto: "Tras nuevos afloramientos de aguas servidas el 21, 22 y 23 de octubre, fiscalizadores de la SISS constatan una falla del emisario de Av. Collao con General Toro, que hace aflorar la red en la rotonda Los Abedules. La SISS informa un proceso de sanción contra Essbio por eventos repetidos (Expediente N° 5191) y le instruye medidas para una solución definitiva (OF NC N° 2986/22).", fuente: "Respuesta de la SISS, folio SAC N° 202223247", destacado: true },
   { anio: "Noviembre 2022", titulo: "Compromiso de 1.000 metros de cañerías", texto: "Essbio se compromete a cambiar 1.000 m de cañerías entre Los Lirios y Nonguén, junto con la reconstrucción de la calle.", fuente: "Actas de reuniones 2022" },
   { anio: "2023", titulo: "Advertencia por proyecto de 452 departamentos", texto: "La junta Protejamos los Lirios advierte que la red no tiene capacidad para un nuevo proyecto de 452 departamentos.", fuente: "Junta de vecinos Protejamos los Lirios" },
   { anio: "2025–2026", titulo: "Colector obstruido en Villa Huáscar", texto: "Se reporta la obstrucción del colector de aguas lluvias.", fuente: "Junta de vecinos Villa Huáscar" },
+  { anio: "Septiembre 2026", titulo: "Aguas servidas frente a la Delegación Collao", texto: "Vecinos registran aguas servidas brotando por la cámara y el sumidero frente a la Delegación Collao.", fuente: "Registro de vecinos, septiembre 2026" },
   { anio: "Octubre 2026", titulo: "Nace la Unión de Juntas de Vecinos", texto: "Las 12 juntas de vecinos de Collao se unen para hablar con una sola voz y fijan una meta de 12 meses.", fuente: "Unión de Juntas de Vecinos del Sector Collao", destacado: true },
   { anio: "Septiembre 2027", titulo: "Meta", texto: "Plazo que se fija la Unión de Juntas de Vecinos para tener resuelto el problema o con obras comprometidas y en ejecución.", fuente: "" },
 ];
