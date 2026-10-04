@@ -17,8 +17,9 @@ form.querySelectorAll('input[name="reclamo"]').forEach((r) =>
 );
 
 // Aviso sobre fotos mientras no exista almacenamiento en línea
-document.getElementById("aviso-fotos").textContent =
-  "Las fotos se envían por WhatsApp al terminar el reporte.";
+document.getElementById("aviso-fotos").textContent = SITIO.whatsapp
+  ? "Las fotos se envían por WhatsApp al terminar el reporte."
+  : "Por ahora las fotos no se suben al sitio. Guárdalas: la directiva de tu junta te las pedirá.";
 
 // Mapa para marcar el punto. Si el mapa no carga (mala señal), el formulario sigue funcionando.
 let marcador = null;
@@ -124,19 +125,24 @@ form.addEventListener("submit", async (e) => {
   let resultado;
   try {
     resultado = await guardarReporte(reporte);
-  } catch {
+  } catch (error) {
     boton.disabled = false;
     boton.textContent = "Enviar reporte";
-    caja.textContent = "No se pudo enviar. Revisa tu conexión a internet e inténtalo de nuevo.";
+    caja.textContent = error.message;
     caja.classList.remove("oculto");
     return;
   }
 
   const texto = textoReporte(reporte);
   const detalle = document.getElementById("gracias-detalle");
-  detalle.textContent = resultado.remoto
-    ? "Los administradores lo revisarán y aparecerá en el mapa. Si tienes fotos o video, envíalos por WhatsApp con el botón de abajo."
-    : "Para que llegue a la Coordinadora, envíalo con uno de estos botones y adjunta tus fotos o video.";
+  if (resultado.remoto) {
+    detalle.textContent = (resultado.visible
+      ? "Ya aparece en el mapa y en los contadores."
+      : "Los administradores lo revisarán y luego aparecerá en el mapa.")
+      + (SITIO.whatsapp ? " Si tienes fotos o video, envíalos por WhatsApp con el botón de abajo." : "");
+  } else {
+    detalle.textContent = "No pudimos conectarnos con el servidor, así que el reporte quedó guardado solo en este teléfono. Para que llegue a la Coordinadora, envíalo con uno de estos botones y adjunta tus fotos o video.";
+  }
 
   if (SITIO.whatsapp) {
     const wa = document.getElementById("enviar-whatsapp");
@@ -150,7 +156,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   if (!resultado.remoto && !SITIO.whatsapp && !SITIO.correo) {
-    detalle.textContent = "Copia este texto y envíalo a la directiva de tu junta, junto con tus fotos o video.";
+    detalle.textContent = "No pudimos conectarnos con el servidor. Copia este texto y envíalo a la directiva de tu junta, junto con tus fotos o video.";
     const pre = document.getElementById("texto-reporte");
     pre.textContent = texto;
     pre.classList.remove("oculto");

@@ -1,0 +1,6 @@
+{
+  "name": "collao-unido",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" }
+}

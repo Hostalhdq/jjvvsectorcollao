@@ -81,34 +81,13 @@ function opcionesJuntas(select, conTodas) {
 }
 
 /* ---------- Almacenamiento de reportes ----------
-   Con FIREBASE_CONFIG: se guardan en Firestore.
-     - "reportes": reporte completo (solo administradores pueden leer).
-     - "reportes_publicos": datos sin nombre ni dirección, con ubicación
-        redondeada a la cuadra. Se muestran en el mapa cuando un
-        administrador marca "aprobado: true".
-   Sin FIREBASE_CONFIG: se guardan en este celular (localStorage). */
+   Los reportes se envían a /api/reportes (función de Vercel con base de datos
+   Upstash Redis). El servidor guarda el reporte completo y solo entrega al
+   público fecha, junta, tipo y ubicación redondeada a la cuadra.
+   Si no hay conexión o la base aún no está conectada, el reporte queda
+   guardado en este celular y se ofrece enviarlo por WhatsApp o correo. */
 
 const CLAVE_LOCAL = "collao_reportes";
-let _db = null;
-
-function cargarScript(src) {
-  return new Promise((resolver, rechazar) => {
-    const s = document.createElement("script");
-    s.src = src; s.onload = resolver; s.onerror = rechazar;
-    document.head.appendChild(s);
-  });
-}
-
-async function baseDeDatos() {
-  if (!FIREBASE_CONFIG) return null;
-  if (_db) return _db;
-  const v = "10.12.2";
-  await cargarScript(`https://www.gstatic.com/firebasejs/${v}/firebase-app-compat.js`);
-  await cargarScript(`https://www.gstatic.com/firebasejs/${v}/firebase-firestore-compat.js`);
-  firebase.initializeApp(FIREBASE_CONFIG);
-  _db = firebase.firestore();
-  return _db;
-}
 
 function leerLocal() {
   try { return JSON.parse(localStorage.getItem(CLAVE_LOCAL)) || []; }
@@ -123,18 +102,27 @@ function aCuadra(valor) {
 function versionPublica(r) {
   return {
     fecha: r.fecha, junta: r.junta, tipo: r.tipo, red: r.red, llovia: r.llovia,
-    lat: aCuadra(r.lat), lng: aCuadra(r.lng), aprobado: false,
+    lat: aCuadra(r.lat), lng: aCuadra(r.lng),
   };
 }
 
 async function guardarReporte(reporte) {
-  const db = await baseDeDatos().catch(() => null);
-  if (db) {
-    const creado = firebase.firestore.FieldValue.serverTimestamp();
-    const ref = await db.collection("reportes").add({ ...reporte, creado });
-    await db.collection("reportes_publicos").doc(ref.id).set({ ...versionPublica(reporte), creado });
-    return { remoto: true, id: ref.id };
+  let resp = null;
+  try {
+    resp = await fetch("/api/reportes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reporte),
+    });
+  } catch { /* sin conexión: se guarda en el celular */ }
+
+  if (resp) {
+    const datos = await resp.json().catch(() => ({}));
+    if (resp.ok) return { remoto: true, id: datos.id, visible: datos.visible };
+    // Datos rechazados o demasiados envíos: se muestra el motivo al vecino
+    if (resp.status === 400 || resp.status === 429) throw new Error(datos.error || "No se pudo enviar el reporte.");
   }
+
   const lista = leerLocal();
   const id = "local-" + Date.now();
   lista.push({ ...reporte, id });
@@ -143,11 +131,10 @@ async function guardarReporte(reporte) {
 }
 
 async function reportesPublicos() {
-  const db = await baseDeDatos().catch(() => null);
-  if (db) {
-    const snap = await db.collection("reportes_publicos").where("aprobado", "==", true).get();
-    return snap.docs.map((d) => d.data());
-  }
+  try {
+    const resp = await fetch("/api/reportes", { cache: "no-store" });
+    if (resp.ok) return (await resp.json()).reportes;
+  } catch { /* sin conexión */ }
   return leerLocal().map(versionPublica);
 }
 

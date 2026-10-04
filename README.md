@@ -44,21 +44,33 @@ y abrir http://localhost:8000
 3. Cuando se compre el dominio (por ejemplo `collaounido.cl` en nic.cl), agregarlo en
    Settings → Domains.
 
-## Guardar los reportes (Firebase)
+## Guardar los reportes (base de datos en Vercel)
 
-Mientras `FIREBASE_CONFIG` esté vacío en `js/datos.js`, el formulario funciona igual: guarda
-el reporte en el celular del vecino y le ofrece enviarlo por WhatsApp o correo
-(configurar `SITIO.whatsapp` y `SITIO.correo`).
+Los reportes se guardan en una base de datos Upstash Redis conectada a Vercel
+(plan gratuito). Las funciones del servidor están en `api/`:
 
-Para guardarlos en línea y que aparezcan en el mapa y los contadores:
+- `api/reportes.js`: recibe los reportes y entrega al mapa solo fecha, junta, tipo
+  y ubicación redondeada a la cuadra (~100 m). Nunca entrega nombre, teléfono ni dirección.
+- `api/admin.js`: entrega los reportes completos, solo con la clave de administración.
 
-1. Crear un proyecto en console.firebase.google.com y activar **Firestore**.
-2. Registrar una app web y copiar su configuración en `FIREBASE_CONFIG` en `js/datos.js`.
-3. Publicar las reglas de `firestore.rules` (Firestore → Reglas).
-4. Los reportes llegan a dos colecciones:
-   - `reportes`: reporte completo con nombre, teléfono y dirección. Solo administradores.
-   - `reportes_publicos`: sin datos personales y con la ubicación redondeada a la cuadra.
-     Aparece en el mapa cuando un administrador cambia `aprobado` a `true`.
+**Conectar la base (una sola vez):**
+
+1. En Vercel, entrar al proyecto → pestaña **Storage** → **Create Database** →
+   elegir **Upstash for Redis** (plan gratis) → conectarla a este proyecto.
+   Vercel crea solo las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN`.
+2. En **Settings → Environment Variables**, agregar `ADMIN_CLAVE` con una clave larga
+   (mínimo 8 caracteres) que solo conozcan los administradores.
+3. Opcional: agregar `MODERAR_REPORTES` = `si` para que cada reporte espere aprobación
+   antes de aparecer en el mapa. Sin esa variable, aparecen de inmediato.
+4. Ir a **Deployments** → en el último, menú ⋯ → **Redeploy**.
+
+Mientras la base no esté conectada, o si el vecino no tiene señal, el reporte queda
+guardado en su celular y se le ofrece enviarlo por WhatsApp o correo
+(configurar `SITIO.whatsapp` y `SITIO.correo` en `js/datos.js`).
+
+**Administración:** entrar a `/admin.html` (no aparece en el menú) con la `ADMIN_CLAVE`.
+Ahí se ven los reportes con los datos de cada vecino, se filtran por junta, se ocultan o
+muestran en el mapa, y se descarga la planilla CSV para el respaldo mensual.
 
 ## Privacidad
 
@@ -69,9 +81,9 @@ Para guardarlos en línea y que aparezcan en el mapa y los contadores:
 
 ## Administración
 
-- Un administrador general y un editor por junta.
+- Un administrador general y un editor por junta (por ahora comparten la `ADMIN_CLAVE`; el panel filtra por junta).
 - Compromisos y documentos se actualizan después de cada reunión de la mesa.
-- Respaldo mensual de los reportes en una planilla (Firestore → exportar), porque son evidencia.
+- Respaldo mensual de los reportes: botón "Descargar planilla" en `/admin.html`, porque son evidencia.
 
 ## Pendientes
 
@@ -79,5 +91,6 @@ Para guardarlos en línea y que aparezcan en el mapa y los contadores:
 - [ ] Presidente/a y contacto de cada junta.
 - [ ] Correo y WhatsApp de la Coordinadora.
 - [ ] Subir los documentos (Plan Maestro, actas, fallo, notas, ficha, catastro).
-- [ ] Configurar Firebase y subida de fotos (Firebase Storage).
+- [ ] Conectar la base de datos en Vercel y definir `ADMIN_CLAVE`.
+- [ ] Subida de fotos al sitio (por ejemplo con Vercel Blob).
 - [ ] Calendario de reuniones.

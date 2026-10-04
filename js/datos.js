@@ -15,11 +15,6 @@ const SITIO = {
   whatsapp: "", // PENDIENTE: número de WhatsApp en formato 569XXXXXXXX
 };
 
-/* Configuración para guardar reportes en Firebase (Firestore).
-   Mientras esté vacío, los reportes se guardan en el celular del vecino
-   y se ofrece enviarlos por WhatsApp o correo. Ver README.md. */
-const FIREBASE_CONFIG = null;
-
 /* Centro aproximado del sector Collao, Concepción */
 const CENTRO_MAPA = { lat: -36.8195, lng: -73.0155, zoom: 15 };
 

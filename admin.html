@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administración · Collao Unido</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header id="encabezado"></header>
+
+  <main id="contenido">
+    <div class="titulo-pagina">
+      <div class="contenedor">
+        <h1>Administración de reportes</h1>
+        <p>Solo para administradores. Aquí se ven los datos personales de los vecinos: no compartas esta pantalla.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="contenedor">
+        <form id="ingreso" style="max-width:420px">
+          <div class="campo">
+            <label for="clave">Clave de administración</label>
+            <input type="password" id="clave" autocomplete="current-password" required>
+          </div>
+          <button class="boton boton-secundario" type="submit">Entrar</button>
+        </form>
+        <p id="mensaje" class="aviso oculto" role="alert"></p>
+
+        <div id="panel" class="oculto">
+          <div class="filtros">
+            <div><label for="f-junta">Junta</label><select id="f-junta"></select></div>
+            <div>
+              <label for="f-visible">Estado</label>
+              <select id="f-visible">
+                <option value="">Todos</option>
+                <option value="si">Visibles en el mapa</option>
+                <option value="no">Ocultos</option>
+              </select>
+            </div>
+            <div style="align-self:end"><button id="csv" class="boton boton-secundario" type="button">Descargar planilla</button></div>
+            <div style="align-self:end"><button id="recargar" class="boton boton-secundario" type="button">Actualizar</button></div>
+          </div>
+          <p id="resumen" aria-live="polite"></p>
+          <div class="tabla-envoltorio">
+            <table class="apilada">
+              <thead>
+                <tr><th>Fecha</th><th>Junta</th><th>Tipo</th><th>¿Llovía?</th><th>Dirección</th><th>Vecino/a</th><th>Reclamo Essbio</th><th>Daños</th><th>Mapa</th></tr>
+              </thead>
+              <tbody id="tabla"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie"></footer>
+
+  <script src="js/datos.js"></script>
+  <script src="js/comun.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
