@@ -22,7 +22,7 @@ y gratis de publicar. Pensado primero para celular y con letra grande.
 ## Cómo actualizar el contenido
 
 Todo el contenido editable está en **`js/datos.js`**: juntas (presidente/a, contacto,
-problemas), compromisos y su estado, documentos, cronología, novedades, puntos conocidos
+problemas), calendario de reuniones (`REUNIONES`, las pasadas se ocultan solas), compromisos y su estado, documentos, cronología, novedades, puntos conocidos
 del mapa, correo y WhatsApp de contacto.
 
 - Estados de compromisos: `verificar`, `curso`, `cumplido`, `incumplido`.
@@ -99,4 +99,3 @@ muestran en el mapa, se borran (botón "Borrar", no se puede deshacer) y se desc
 - [ ] Subir los documentos (Plan Maestro, actas, fallo, notas, ficha, catastro).
 - [ ] Conectar la base de datos en Vercel y definir `ADMIN_CLAVE`.
 - [ ] Subida de fotos al sitio (por ejemplo con Vercel Blob).
-- [ ] Calendario de reuniones.

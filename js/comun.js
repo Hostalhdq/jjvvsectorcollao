@@ -115,6 +115,42 @@ function pintarPie() {
     </div>`;
 }
 
+/* Teléfono para enlaces: "+56 9 9840 0418" -> "+56998400418" */
+function soloDigitos(telefono) {
+  return String(telefono || "").replace(/[^\d+]/g, "");
+}
+
+function proximasReuniones() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  return REUNIONES
+    .filter((r) => new Date(`${r.fecha}T23:59`) >= hoy)
+    .sort((a, b) => (a.fecha + a.hora).localeCompare(b.fecha + b.hora));
+}
+
+function fechaLarga(fecha) {
+  const texto = new Date(`${fecha}T12:00`).toLocaleDateString("es-CL", { weekday: "long", day: "numeric", month: "long" });
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+function tarjetaReunion(r) {
+  const mapa = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.direccion)}`;
+  return `
+    <article class="tarjeta reunion">
+      <div class="reunion-fecha">
+        <span class="dia">${escaparHTML(fechaLarga(r.fecha))}</span>
+        <span class="hora">${escaparHTML(r.hora)} horas</span>
+      </div>
+      <div>
+        <h3>${escaparHTML(r.titulo)}</h3>
+        <p>${ICONOS.ubicacion} <strong>${escaparHTML(r.lugar)}</strong><br>
+          <a href="${mapa}" target="_blank" rel="noopener">${escaparHTML(r.direccion)}</a></p>
+        ${r.contacto ? `<p>${ICONOS.telefono} ${escaparHTML(r.contacto)}${r.telefono
+          ? ` · <a href="tel:${soloDigitos(r.telefono)}">${escaparHTML(r.telefono)}</a>` : ""}</p>` : ""}
+      </div>
+    </article>`;
+}
+
 function nombreJunta(id) {
   const junta = JUNTAS.find((j) => j.id === id);
   return junta ? junta.nombre : id;

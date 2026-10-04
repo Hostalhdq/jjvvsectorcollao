@@ -26,7 +26,7 @@
     <section class="alt" id="calendario">
       <div class="contenedor">
         <h2>Calendario de reuniones</h2>
-        <p>Próximamente publicaremos aquí las fechas de las reuniones de la Unión de Juntas de Vecinos y de la mesa técnica.</p>
+        <div id="reuniones" class="grilla"></div>
       </div>
     </section>
   </main>
@@ -40,12 +40,17 @@
       <article class="tarjeta" id="${j.id}">
         <h2 style="font-size:1.2rem">${escaparHTML(j.nombre)}</h2>
         <p><strong>Presidente/a:</strong> ${j.presidente ? escaparHTML(j.presidente) : "<span class='ayuda'>Por confirmar</span>"}</p>
-        ${j.contacto ? `<p><strong>Contacto:</strong> ${escaparHTML(j.contacto)}</p>` : ""}
+        ${j.contacto ? `<p><strong>Contacto:</strong> <a href="tel:${soloDigitos(j.contacto)}">${escaparHTML(j.contacto)}</a></p>` : ""}
         <p><strong>Problemas conocidos:</strong></p>
         ${j.problemas.length
           ? `<ul>${j.problemas.map((p) => `<li>${escaparHTML(p)}</li>`).join("")}</ul>`
           : `<p class="ayuda">Por completar. <a href="reportar.html">Reporta un rebalse</a> para sumar evidencia.</p>`}
       </article>`).join("");
+
+    const reuniones = proximasReuniones();
+    document.getElementById("reuniones").innerHTML = reuniones.length
+      ? reuniones.map(tarjetaReunion).join("")
+      : "<p>No hay reuniones agendadas por ahora. Consulta con la directiva de tu junta.</p>";
   </script>
 </body>
 </html>

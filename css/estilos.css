@@ -377,3 +377,16 @@ fieldset { border: 2px solid var(--borde); border-radius: var(--radio); padding:
   .marca strong { font-size: 1rem; line-height: 1.15; }
   .marca small { margin-top: 2px; }
 }
+
+/* ---------- Reuniones ---------- */
+.reunion { display: grid; gap: 18px; grid-template-columns: 1fr; border-left: 6px solid var(--celeste); }
+@media (min-width: 700px) { .reunion { grid-template-columns: 220px 1fr; align-items: center; } }
+.reunion-fecha {
+  background: var(--azul-noche); color: #fff; border-radius: 12px;
+  padding: 16px; text-align: center; line-height: 1.25;
+}
+.reunion-fecha .dia { display: block; font-weight: 700; font-size: 1.1rem; }
+.reunion-fecha .hora { display: block; font-size: 1.6rem; font-weight: 800; color: #9fd8f7; font-variant-numeric: tabular-nums; }
+.reunion p { margin: 0 0 8px; }
+.reunion svg.icono { color: var(--azul); }
+a[href^="tel:"] { white-space: nowrap; }

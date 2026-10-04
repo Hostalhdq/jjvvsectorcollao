@@ -85,6 +85,17 @@
       </div>
     </section>
 
+    <section id="seccion-reunion" class="oculto">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <h2>Próxima reunión</h2>
+          <span class="divisor" aria-hidden="true"></span>
+          <a class="pildora" href="juntas.html#calendario">Calendario</a>
+        </div>
+        <div id="proxima-reunion"></div>
+      </div>
+    </section>
+
     <section class="alt">
       <div class="contenedor">
         <div class="titulo-seccion">
@@ -122,6 +133,12 @@
         <h3>${escaparHTML(n.titulo)}</h3>
         <p>${escaparHTML(n.texto)}</p>
       </article>`).join("");
+
+    const proxima = proximasReuniones()[0];
+    if (proxima) {
+      document.getElementById("proxima-reunion").innerHTML = tarjetaReunion(proxima);
+      document.getElementById("seccion-reunion").classList.remove("oculto");
+    }
   </script>
 </body>
 </html>

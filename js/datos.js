@@ -22,7 +22,7 @@ const JUNTAS = [
   { id: "collao-norte", nombre: "Collao Norte", presidente: "David Quiero", contacto: "", problemas: [] },
   { id: "estero-nonguen", nombre: "Estero Nonguén", presidente: "", contacto: "", problemas: [] },
   { id: "ignacio-collao", nombre: "Ignacio Collao", presidente: "", contacto: "", problemas: ["Rebalses de cámaras (nota El Sur, 2022)"] },
-  { id: "jardines-de-collao", nombre: "Jardines de Collao", presidente: "", contacto: "", problemas: [] },
+  { id: "jardines-de-collao", nombre: "Jardines de Collao", presidente: "Mauricio Jara", contacto: "+56 9 9840 0418", problemas: [] },
   { id: "lagos-de-chile", nombre: "Lagos de Chile", presidente: "", contacto: "", problemas: [] },
   { id: "parque-residencial-collao", nombre: "Parque Residencial Collao", presidente: "", contacto: "", problemas: ["Rebalses frente a la UBB (nota El Sur, 2022)"] },
   { id: "parque-residencial-los-fresnos", nombre: "Parque Residencial Los Fresnos", presidente: "", contacto: "", problemas: ["Afectada por rebalses (nota El Sur, 2022)"] },
@@ -95,6 +95,21 @@ const HISTORIA = [
   { anio: "2025–2026", titulo: "Colector obstruido en Villa Huáscar", texto: "Se reporta la obstrucción del colector de aguas lluvias.", fuente: "Junta de vecinos Villa Huáscar" },
   { anio: "Octubre 2026", titulo: "Nace la Unión de Juntas de Vecinos", texto: "Las 12 juntas de vecinos de Collao se unen para hablar con una sola voz y fijan una meta de 12 meses.", fuente: "Unión de Juntas de Vecinos del Sector Collao", destacado: true },
   { anio: "Septiembre 2027", titulo: "Meta", texto: "Plazo que se fija la Unión de Juntas de Vecinos para tener resuelto el problema o con obras comprometidas y en ejecución.", fuente: "" },
+];
+
+/* Calendario de reuniones. fecha en formato AAAA-MM-DD y hora HH:MM.
+   Las reuniones ya pasadas se ocultan solas. */
+const REUNIONES = [
+  {
+    fecha: "2026-10-05",
+    hora: "18:30",
+    titulo: "Reunión de la Unión de Juntas de Vecinos",
+    lugar: "Junta de Vecinos Jardines de Collao",
+    direccion: "Pasaje 10 N°750, Los Jardines de Collao, Concepción",
+    junta: "jardines-de-collao",
+    contacto: "Mauricio Jara, presidente",
+    telefono: "+56 9 9840 0418",
+  },
 ];
 
 const NOVEDADES = [
