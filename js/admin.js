@@ -69,12 +69,32 @@ function pintar() {
         <button class="boton boton-secundario" style="min-height:44px;padding:8px 12px;font-size:.9rem" data-id="${escaparHTML(r.id)}" data-visible="${r.visible ? "no" : "si"}">
           ${r.visible ? "Ocultar" : "Mostrar"}
         </button>
+        <button class="boton boton-secundario" style="min-height:44px;padding:8px 12px;font-size:.9rem;color:var(--rojo);border-color:var(--rojo)" data-borrar="${escaparHTML(r.id)}">
+          Borrar
+        </button>
       </td>
     </tr>`).join("")
     : `<tr><td colspan="9">No hay reportes con estos filtros.</td></tr>`;
 }
 
 document.getElementById("tabla").addEventListener("click", async (e) => {
+  const borrar = e.target.closest("button[data-borrar]");
+  if (borrar) {
+    const r = reportes.find((x) => x.id === borrar.dataset.borrar);
+    const resumen = `${(r.fecha || "").replace("T", " ")} · ${nombreJunta(r.junta)} · ${r.direccion}`;
+    if (!confirm(`¿Borrar para siempre este reporte?\n\n${resumen}\n\nNo se puede deshacer. Si solo quieres sacarlo del mapa, usa "Ocultar".`)) return;
+    borrar.disabled = true;
+    try {
+      await llamar("DELETE", { id: r.id });
+      reportes = reportes.filter((x) => x.id !== r.id);
+      pintar();
+    } catch (err) {
+      mostrarMensaje(err.message);
+      borrar.disabled = false;
+    }
+    return;
+  }
+
   const boton = e.target.closest("button[data-id]");
   if (!boton) return;
   boton.disabled = true;

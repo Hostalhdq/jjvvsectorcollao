@@ -1,7 +1,8 @@
 /* Administración de reportes. Requiere la clave ADMIN_CLAVE (variable de Vercel)
    en el encabezado "x-clave-admin".
    GET:  todos los reportes con datos personales.
-   POST: { id, visible } muestra u oculta un reporte en el mapa. */
+   POST: { id, visible } muestra u oculta un reporte en el mapa.
+   DELETE: { id } borra un reporte para siempre. */
 
 import { timingSafeEqual, createHash } from "node:crypto";
 import { redis, hayBaseDeDatos, todosLosReportes } from "../lib/redis.js";
@@ -40,7 +41,14 @@ export default async function handler(req, res) {
       return responder(res, 200, { ok: true, visible: reporte.visible });
     }
 
-    res.setHeader("Allow", "GET, POST");
+    if (req.method === "DELETE") {
+      const { id } = await leerCuerpo(req);
+      const borrados = await redis("HDEL", "reportes", String(id || ""));
+      if (!borrados) return responder(res, 404, { error: "No existe ese reporte." });
+      return responder(res, 200, { ok: true });
+    }
+
+    res.setHeader("Allow", "GET, POST, DELETE");
     return responder(res, 405, { error: "Método no permitido." });
   } catch (e) {
     console.error(e);

@@ -76,7 +76,7 @@ guardado en su celular y se le ofrece enviarlo por WhatsApp o correo
 
 **Administración:** entrar a `/admin.html` (no aparece en el menú) con la `ADMIN_CLAVE`.
 Ahí se ven los reportes con los datos de cada vecino, se filtran por junta, se ocultan o
-muestran en el mapa, y se descarga la planilla CSV para el respaldo mensual.
+muestran en el mapa, se borran (botón "Borrar", no se puede deshacer) y se descarga la planilla CSV para el respaldo mensual.
 
 ## Privacidad
 
