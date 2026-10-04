@@ -30,6 +30,12 @@ del mapa, correo y WhatsApp de contacto.
   De las notas de prensa, publicar un resumen propio y el enlace, no el escaneo completo.
 - Las coordenadas de `PUNTOS_CONOCIDOS` son aproximadas: verificarlas.
 
+## Foto de portada
+
+La portada usa un fondo azul. Para poner una foto real del sector (por ejemplo una calle
+anegada o una reunión de las juntas), guárdala como `img/portada.jpg`, de unos 1600 px de
+ancho. El sitio la usa automáticamente, con un velo azul encima para que el texto se lea.
+
 ## Ver el sitio en tu computador
 
 ```

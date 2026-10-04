@@ -13,19 +13,73 @@
   <main id="contenido">
     <section class="portada">
       <div class="contenedor">
-        <h1>En Collao, el alcantarillado rebalsa y las calles se inundan. Hace más de 20 años.</h1>
-        <p>Somos 12 juntas de vecinos y cerca de 35 mil habitantes hablando con una sola voz para que Essbio, SERVIU, DOH y el municipio cumplan.</p>
-        <p class="meta"><strong>Nuestra meta:</strong> resolver el problema de alcantarillado y aguas lluvias en 12 meses, de octubre 2026 a septiembre 2027.</p>
-        <div class="acciones">
-          <a class="boton boton-rebalse boton-grande" href="reportar.html">🚨 Reportar un rebalse</a>
-          <a class="boton boton-secundario" href="mapa.html">Ver el mapa</a>
+        <div class="encabezado-portada">
+          <h1>¿Qué necesitas?</h1>
+          <p class="bajada">Las 12 juntas de vecinos de Collao trabajamos unidas para solucionar los rebalses de alcantarillado y las inundaciones por aguas lluvias.</p>
         </div>
+
+        <div class="bloques">
+          <article class="bloque urgente">
+            <div class="bloque-titulo">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6 4 40h40L24 6z"/><path d="M24 19v9M24 34h.01"/></svg>
+              <h2>Reportar</h2>
+            </div>
+            <ul>
+              <li><a href="reportar.html">Reportar un rebalse</a></li>
+              <li><a href="mapa.html">Mapa de puntos críticos</a></li>
+            </ul>
+            <a class="mas" href="reportar.html" aria-label="Más sobre reportar">Más</a>
+          </article>
+
+          <article class="bloque">
+            <div class="bloque-titulo">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="19"/><path d="M24 22v12M24 15h.01"/></svg>
+              <h2>Información</h2>
+            </div>
+            <ul>
+              <li><a href="problema.html">El problema, explicado simple</a></li>
+              <li><a href="historia.html">Historia 2001–2026</a></li>
+              <li><a href="documentos.html">Documentos</a></li>
+            </ul>
+            <a class="mas" href="problema.html" aria-label="Más información">Más</a>
+          </article>
+
+          <article class="bloque">
+            <div class="bloque-titulo">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="7" width="28" height="35" rx="3"/><path d="M18 7h12v5H18zM16 22l3 3 6-6M16 33h16"/></svg>
+              <h2>Seguimiento</h2>
+            </div>
+            <ul>
+              <li><a href="compromisos.html">Compromisos de Essbio, SERVIU, DOH y el municipio</a></li>
+              <li><a href="#en-que-vamos">En qué vamos</a></li>
+            </ul>
+            <a class="mas" href="compromisos.html" aria-label="Más sobre el seguimiento">Más</a>
+          </article>
+
+          <article class="bloque">
+            <div class="bloque-titulo">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="16" r="6"/><path d="M6 40a11 11 0 0 1 22 0"/><circle cx="33" cy="18" r="5"/><path d="M30 29a9 9 0 0 1 12 9"/></svg>
+              <h2>Participar</h2>
+            </div>
+            <ul>
+              <li><a href="juntas.html">Las juntas de vecinos</a></li>
+              <li><a href="juntas.html#calendario">Calendario de reuniones</a></li>
+            </ul>
+            <a class="mas" href="juntas.html" aria-label="Más sobre participar">Más</a>
+          </article>
+        </div>
+
+        <p class="meta-portada"><strong>Meta:</strong> resolver el problema de alcantarillado y aguas lluvias en 12 meses, de octubre 2026 a septiembre 2027.</p>
       </div>
     </section>
 
-    <section>
+    <section id="en-que-vamos">
       <div class="contenedor">
-        <h2>En qué vamos</h2>
+        <div class="titulo-seccion">
+          <h2>En qué vamos</h2>
+          <span class="divisor" aria-hidden="true"></span>
+          <a class="pildora" href="mapa.html">Ver mapa</a>
+        </div>
         <div id="contadores" class="grilla grilla-4" aria-live="polite"></div>
         <p class="aviso aviso-info">Cada rebalse que reportas se convierte en evidencia. Así ninguna institución puede decir que son casos aislados.</p>
       </div>
@@ -33,21 +87,26 @@
 
     <section class="alt">
       <div class="contenedor">
-        <h2>Últimas novedades</h2>
+        <div class="titulo-seccion">
+          <h2>Noticias</h2>
+          <span class="divisor" aria-hidden="true"></span>
+          <a class="pildora" href="historia.html">Más</a>
+        </div>
         <div id="novedades" class="grilla grilla-2"></div>
       </div>
     </section>
 
     <section>
       <div class="contenedor">
-        <h2>Qué queremos lograr</h2>
-        <div class="grilla grilla-2">
-          <div class="tarjeta"><h3>📄 Informar con datos</h3><p>Documentos y cifras, no rumores.</p></div>
-          <div class="tarjeta"><h3>📍 Registrar cada rebalse</h3><p>Con fecha, lugar y fotos, para tener un catastro que nadie pueda negar.</p></div>
-          <div class="tarjeta"><h3>✅ Seguir los compromisos</h3><p>Lo que prometen Essbio, SERVIU, DOH y el municipio queda público, con fecha y estado.</p></div>
-          <div class="tarjeta"><h3>🤝 Mostrar unidad</h3><p>12 juntas, una sola voz, por cerca de 35 mil vecinos.</p></div>
+        <div class="titulo-seccion">
+          <h2>Nuestros objetivos</h2>
         </div>
-        <p style="margin-top:24px"><a href="problema.html">Entiende el problema en 2 minutos →</a></p>
+        <div class="grilla grilla-2">
+          <div class="tarjeta"><h3>Informar con datos</h3><p>Documentos y cifras, no rumores.</p></div>
+          <div class="tarjeta"><h3>Registrar cada rebalse</h3><p>Con fecha, lugar y fotos, para tener un catastro que nadie pueda negar.</p></div>
+          <div class="tarjeta"><h3>Seguir los compromisos</h3><p>Lo que prometen Essbio, SERVIU, DOH y el municipio queda público, con fecha y estado.</p></div>
+          <div class="tarjeta"><h3>Hablar con una sola voz</h3><p>12 juntas de vecinos por cerca de 35 mil habitantes de Collao.</p></div>
+        </div>
       </div>
     </section>
   </main>
@@ -59,7 +118,7 @@
   <script>
     document.getElementById("novedades").innerHTML = NOVEDADES.map((n) => `
       <article class="tarjeta">
-        <p class="paso">${escaparHTML(n.fecha)}</p>
+        <p class="etiqueta-nota">${escaparHTML(n.fecha)}</p>
         <h3>${escaparHTML(n.titulo)}</h3>
         <p>${escaparHTML(n.texto)}</p>
       </article>`).join("");
