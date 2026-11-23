@@ -74,6 +74,32 @@ Mientras la base no esté conectada, o si el vecino no tiene señal, el reporte 
 guardado en su celular y se le ofrece enviarlo por WhatsApp o correo
 (configurar `SITIO.whatsapp` y `SITIO.correo` en `js/datos.js`).
 
+## Fotos y videos de los reportes (Vercel Blob)
+
+Las fotos se guardan en **Vercel Blob** como archivos **privados**: no tienen un enlace
+público y solo se ven en `/admin.html` con la `ADMIN_CLAVE`. La función está en `api/fotos.js`.
+
+**Conectar el almacenamiento (una sola vez):**
+
+1. En Vercel, entrar al proyecto → pestaña **Storage** → **Create Database** → **Blob**.
+   Si pregunta el tipo de acceso, elegir **Private**. Conectarlo a este proyecto.
+   Vercel crea sola la variable `BLOB_READ_WRITE_TOKEN`.
+2. **Deployments** → en el último, menú ⋯ → **Redeploy**.
+
+Cómo funciona:
+
+- El reporte se guarda primero; después se suben las fotos una por una. Si una foto falla,
+  el reporte no se pierde y al vecino se le dice cuál no subió.
+- En el celular, las fotos se achican a 1600 px (JPG) antes de subir, y se les borran los
+  datos ocultos (como la ubicación GPS).
+- Hasta 6 fotos o videos por reporte, máximo 4 MB cada uno (límite de Vercel). Solo fotos
+  JPG, PNG, WebP o HEIC y videos MP4, MOV o WebM. Solo se pueden agregar fotos a un reporte
+  durante las 2 horas siguientes a su envío.
+- Al borrar un reporte en el panel, se borran también sus fotos.
+- Mientras el almacenamiento no esté conectado, el formulario sigue avisando que las fotos
+  se pedirán después, como antes.
+- Plan gratis de Vercel Blob: alrededor de 1 GB (unas 3.000 fotos achicadas).
+
 **Administración:** entrar a `/admin.html` (no aparece en el menú) con la `ADMIN_CLAVE`.
 Ahí se ven los reportes con los datos de cada vecino, se filtran por junta, se ocultan o
 muestran en el mapa, se borran (botón "Borrar", no se puede deshacer) y se descarga la planilla CSV para el respaldo mensual.
@@ -98,4 +124,4 @@ muestran en el mapa, se borran (botón "Borrar", no se puede deshacer) y se desc
 - [ ] Correo y WhatsApp de la Unión de Juntas de Vecinos.
 - [ ] Subir los documentos (Plan Maestro, actas, fallo, notas, ficha, catastro).
 - [ ] Conectar la base de datos en Vercel y definir `ADMIN_CLAVE`.
-- [ ] Subida de fotos al sitio (por ejemplo con Vercel Blob).
+- [x] Subida de fotos al sitio (Vercel Blob). Falta crear el almacenamiento Blob en Vercel.

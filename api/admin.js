@@ -2,18 +2,20 @@
    en el encabezado "x-clave-admin".
    GET:  todos los reportes con datos personales.
    POST: { id, visible } muestra u oculta un reporte en el mapa.
-   DELETE: { id } borra un reporte para siempre. */
+   DELETE: { id } borra un reporte para siempre, con sus fotos. */
 
-import { timingSafeEqual, createHash } from "node:crypto";
-import { redis, hayBaseDeDatos, todosLosReportes } from "../lib/redis.js";
+import { del } from "@vercel/blob";
+import { redis, redisVarios, hayBaseDeDatos, todosLosReportes, claveFotos, leerFotos } from "../lib/redis.js";
 import { responder, leerCuerpo } from "../lib/http.js";
+import { claveCorrecta } from "../lib/clave.js";
 
-function claveCorrecta(recibida) {
-  const real = process.env.ADMIN_CLAVE;
-  if (!real || real.length < 8 || !recibida) return false;
-  const a = createHash("sha256").update(String(recibida)).digest();
-  const b = createHash("sha256").update(real).digest();
-  return timingSafeEqual(a, b);
+/* Agrega a cada reporte la lista de sus fotos (sin el enlace directo al archivo) */
+async function conFotos(reportes) {
+  const listas = await redisVarios(reportes.map((r) => ["LRANGE", claveFotos(r.id), 0, -1]));
+  return reportes.map((r, i) => ({
+    ...r,
+    fotos: leerFotos(listas[i]).map(({ ruta, tipo, bytes, subida }) => ({ ruta, tipo, bytes, subida })),
+  }));
 }
 
 export default async function handler(req, res) {
@@ -29,7 +31,7 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === "GET") {
-      return responder(res, 200, { reportes: await todosLosReportes() });
+      return responder(res, 200, { reportes: await conFotos(await todosLosReportes()) });
     }
 
     if (req.method === "POST") {
@@ -45,6 +47,11 @@ export default async function handler(req, res) {
       const { id } = await leerCuerpo(req);
       const borrados = await redis("HDEL", "reportes", String(id || ""));
       if (!borrados) return responder(res, 404, { error: "No existe ese reporte." });
+      const fotos = leerFotos(await redis("LRANGE", claveFotos(String(id)), 0, -1));
+      if (fotos.length && process.env.BLOB_READ_WRITE_TOKEN) {
+        try { await del(fotos.map((f) => f.url)); } catch (e) { console.error(e); }
+      }
+      await redis("DEL", claveFotos(String(id)));
       return responder(res, 200, { ok: true });
     }
 

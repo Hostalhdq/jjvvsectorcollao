@@ -16,10 +16,81 @@ form.querySelectorAll('input[name="reclamo"]').forEach((r) =>
   })
 );
 
-// Aviso sobre fotos mientras no exista almacenamiento en línea
-document.getElementById("aviso-fotos").textContent = SITIO.whatsapp
-  ? "Las fotos se envían por WhatsApp al terminar el reporte."
-  : "Por ahora las fotos no se suben al sitio. Guárdalas: la directiva de tu junta te las pedirá.";
+// Fotos: se suben al sitio si el almacenamiento está conectado; si no, se piden después
+const MAX_FOTOS = 6;
+const MAX_BYTES_FOTO = 4 * 1024 * 1024;
+let fotosEnLinea = false;
+const avisoFotos = document.getElementById("aviso-fotos");
+
+function avisoSinFotos() {
+  avisoFotos.textContent = SITIO.whatsapp
+    ? "Las fotos se envían por WhatsApp al terminar el reporte."
+    : "Por ahora las fotos no se suben al sitio. Guárdalas: la directiva de tu junta te las pedirá.";
+}
+avisoSinFotos();
+
+fetch("/api/fotos", { cache: "no-store" })
+  .then((r) => (r.ok ? r.json() : {}))
+  .then((d) => {
+    fotosEnLinea = Boolean(d.disponible);
+    if (fotosEnLinea) {
+      avisoFotos.textContent = `Hasta ${MAX_FOTOS} fotos o videos cortos (máximo 4 MB cada video). Se guardan en privado: solo los ven los administradores.`;
+    }
+  })
+  .catch(() => { /* sin conexión: se mantiene el aviso */ });
+
+form.fotos.addEventListener("change", () => {
+  const n = form.fotos.files.length;
+  if (!fotosEnLinea || !n) return;
+  avisoFotos.textContent = n > MAX_FOTOS
+    ? `Elegiste ${n} archivos. Se subirán solo los primeros ${MAX_FOTOS}.`
+    : `${n} archivo(s) listo(s) para subir.`;
+});
+
+/* Achica las fotos en el celular (máx. 1600 px, JPG) para que suban rápido con poca señal.
+   También borra los datos ocultos de la foto (como la ubicación GPS). */
+async function prepararFoto(archivo) {
+  if (!archivo.type.startsWith("image/") || typeof createImageBitmap !== "function") return archivo;
+  try {
+    const imagen = await createImageBitmap(archivo, { imageOrientation: "from-image" });
+    const escala = Math.min(1, 1600 / Math.max(imagen.width, imagen.height));
+    const lienzo = document.createElement("canvas");
+    lienzo.width = Math.round(imagen.width * escala);
+    lienzo.height = Math.round(imagen.height * escala);
+    lienzo.getContext("2d").drawImage(imagen, 0, 0, lienzo.width, lienzo.height);
+    imagen.close?.();
+    const jpg = await new Promise((ok) => lienzo.toBlob(ok, "image/jpeg", 0.82));
+    return jpg || archivo;
+  } catch {
+    return archivo; // el navegador no pudo leerla: se intenta subir tal cual
+  }
+}
+
+/* Sube los archivos uno por uno. Devuelve cuántos llegaron y cuáles no. */
+async function subirFotos(idReporte, archivos, alAvanzar) {
+  let subidas = 0;
+  const fallidas = [];
+  for (let i = 0; i < archivos.length; i++) {
+    alAvanzar(i + 1, archivos.length);
+    const archivo = await prepararFoto(archivos[i]);
+    if (archivo.size > MAX_BYTES_FOTO) { fallidas.push(`${archivos[i].name} (pesa más de 4 MB)`); continue; }
+    try {
+      const resp = await fetch(`/api/fotos?reporte=${encodeURIComponent(idReporte)}`, {
+        method: "POST",
+        headers: { "Content-Type": archivo.type || "application/octet-stream" },
+        body: archivo,
+      });
+      if (resp.ok) subidas++;
+      else {
+        const datos = await resp.json().catch(() => ({}));
+        fallidas.push(`${archivos[i].name}${datos.error ? `: ${datos.error.replace(/\.$/, "")}` : ""}`);
+      }
+    } catch {
+      fallidas.push(`${archivos[i].name} (sin conexión)`);
+    }
+  }
+  return { subidas, fallidas };
+}
 
 // Mapa para marcar el punto. Si el mapa no carga (mala señal), el formulario sigue funcionando.
 let marcador = null;
@@ -133,13 +204,33 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  // Fotos: se suben después de guardar el reporte, para que el reporte nunca se pierda por una foto
+  const archivos = Array.from(form.fotos.files).slice(0, MAX_FOTOS);
+  let fotos = null;
+  if (resultado.remoto && resultado.id && fotosEnLinea && archivos.length) {
+    fotos = await subirFotos(resultado.id, archivos, (i, total) => {
+      boton.textContent = `Subiendo foto ${i} de ${total}…`;
+    });
+  }
+
   const texto = textoReporte(reporte);
   const detalle = document.getElementById("gracias-detalle");
   if (resultado.remoto) {
+    let sobreFotos = "";
+    if (fotos) {
+      sobreFotos = ` Se subieron ${fotos.subidas} de ${archivos.length} foto(s) o video(s).`;
+      if (fotos.fallidas.length) {
+        sobreFotos += ` No se pudieron subir: ${fotos.fallidas.join("; ")}. Guárdalas: la directiva de tu junta te las pedirá.`;
+      }
+    } else if (archivos.length) {
+      sobreFotos = SITIO.whatsapp
+        ? " Si tienes fotos o video, envíalos por WhatsApp con el botón de abajo."
+        : " Guarda tus fotos o video: la directiva de tu junta te los pedirá.";
+    }
     detalle.textContent = (resultado.visible
       ? "Ya aparece en el mapa y en los contadores."
       : "Los administradores lo revisarán y luego aparecerá en el mapa.")
-      + (SITIO.whatsapp ? " Si tienes fotos o video, envíalos por WhatsApp con el botón de abajo." : "");
+      + sobreFotos;
   } else {
     detalle.textContent = "No pudimos conectarnos con el servidor, así que el reporte quedó guardado solo en este teléfono. Para que llegue a la Unión de Juntas de Vecinos, envíalo con uno de estos botones y adjunta tus fotos o video.";
   }
