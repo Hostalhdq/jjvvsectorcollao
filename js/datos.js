@@ -2,8 +2,7 @@
  * DATOS DEL SITIO
  * ----------------
  * Este es el único archivo que hay que editar para actualizar juntas,
- * compromisos, documentos, cronología, novedades y puntos del mapa.
- * Después de cada reunión de la mesa, actualizar "compromisos" y "novedades".
+ * reuniones, documentos, cronología, novedades y puntos del mapa.
  */
 
 const SITIO = {
@@ -38,58 +37,6 @@ const JUNTAS = [
   { id: "puertas-del-mar", nombre: "Puertas del Mar", presidente: "", contacto: "", problemas: [] },
   { id: "vegas-de-nonguen", nombre: "Vegas de Nonguén", presidente: "", contacto: "", problemas: [] },
   { id: "villa-huascar", nombre: "Villa Huáscar", presidente: "", contacto: "", problemas: ["Colector de aguas lluvias obstruido (2025–2026)"] },
-];
-
-/* Estados posibles: "verificar", "curso", "cumplido", "incumplido" */
-const COMPROMISOS = [
-  {
-    compromiso: "Cambiar 1.000 m de cañerías entre Los Lirios y Nonguén",
-    institucion: "Essbio",
-    fecha: "Noviembre 2022",
-    plazo: "Con reconstrucción de calle",
-    estado: "verificar",
-    textoEstado: "Por verificar",
-  },
-  {
-    compromiso: "Cambiar redes frente a Terrazas de Collao",
-    institucion: "Essbio",
-    fecha: "Septiembre 2022",
-    plazo: "Sin plazo",
-    estado: "verificar",
-    textoEstado: "Por verificar",
-  },
-  {
-    compromiso: "Entregar el resultado de la campaña de humo",
-    institucion: "Essbio",
-    fecha: "Septiembre 2022",
-    plazo: "Sin plazo",
-    estado: "verificar",
-    textoEstado: "Por verificar",
-  },
-  {
-    compromiso: "Obras de aguas lluvias en Collao (sistemas 24, 31 y 33)",
-    institucion: "DOH",
-    fecha: "Plan Maestro 2001",
-    plazo: "2002–2003",
-    estado: "incumplido",
-    textoEstado: "Sin evidencia de ejecución",
-  },
-  {
-    compromiso: "Corregir las fallas del sistema de recolección y hacer las obras de regularización (medidas instruidas por la SISS en el OF NC N° 2986/22)",
-    institucion: "Essbio",
-    fecha: "Octubre 2022",
-    plazo: "Sin plazo informado",
-    estado: "verificar",
-    textoEstado: "Por verificar",
-  },
-  {
-    compromiso: "Resolver el proceso de sanción contra Essbio por falta de continuidad del servicio (Expediente N° 5191)",
-    institucion: "SISS",
-    fecha: "Octubre 2022",
-    plazo: "Sin plazo informado",
-    estado: "verificar",
-    textoEstado: "Por verificar",
-  },
 ];
 
 /* Biblioteca de documentos. "enlace" vacío = documento aún no subido.

@@ -1,13 +1,13 @@
 /* Código compartido por todas las páginas: menú, pie, reportes y contadores. */
 
+/* "menu: false": la página sale en el pie, pero no en el menú de arriba */
 const PAGINAS = [
   { archivo: "index.html", titulo: "Inicio" },
   { archivo: "reportar.html", titulo: "Reportar rebalse" },
   { archivo: "mapa.html", titulo: "Mapa" },
   { archivo: "problema.html", titulo: "El problema" },
-  { archivo: "historia.html", titulo: "Historia" },
-  { archivo: "compromisos.html", titulo: "Compromisos" },
-  { archivo: "documentos.html", titulo: "Documentos" },
+  { archivo: "historia.html", titulo: "Historia", menu: false },
+  { archivo: "documentos.html", titulo: "Documentos", menu: false },
   { archivo: "juntas.html", titulo: "Las juntas" },
 ];
 
@@ -37,7 +37,7 @@ const ICONOS = {
 
 function pintarEncabezado() {
   const actual = paginaActual();
-  const enlaces = PAGINAS.map((p) =>
+  const enlaces = PAGINAS.filter((p) => p.menu !== false).map((p) =>
     `<li><a href="${p.archivo}"${p.archivo === actual ? ' aria-current="page"' : ""}>${p.titulo}</a></li>`
   ).join("");
 
@@ -235,13 +235,13 @@ async function pintarContadores() {
   if (!caja) return;
   const reportes = await reportesPublicos().catch(() => []);
   const sinLluvia = reportes.filter((r) => r.llovia === "no").length;
-  const cumplidos = COMPROMISOS.filter((c) => c.estado === "cumplido").length;
-  const pendientes = COMPROMISOS.length - cumplidos;
+  const ahora = new Date();
+  const mes = `${ahora.getFullYear()}-${String(ahora.getMonth() + 1).padStart(2, "0")}`;
+  const esteMes = reportes.filter((r) => (r.fecha || "").startsWith(mes)).length;
   caja.innerHTML = `
     <div class="tarjeta contador"><span class="numero">${reportes.length}</span><span class="etiqueta">rebalses reportados</span></div>
     <div class="tarjeta contador rojo"><span class="numero">${sinLluvia}</span><span class="etiqueta">rebalses sin lluvia</span></div>
-    <div class="tarjeta contador verde"><span class="numero">${cumplidos}</span><span class="etiqueta">compromisos cumplidos</span></div>
-    <div class="tarjeta contador rojo"><span class="numero">${pendientes}</span><span class="etiqueta">compromisos pendientes</span></div>`;
+    <div class="tarjeta contador"><span class="numero">${esteMes}</span><span class="etiqueta">este mes</span></div>`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {

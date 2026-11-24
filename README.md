@@ -10,22 +10,20 @@ y gratis de publicar. Pensado primero para celular y con letra grande.
 
 | Página | Archivo |
 |---|---|
-| Inicio (meta, botón "Reportar rebalse", contadores, novedades) | `index.html` |
+| Inicio (botones "Reportar un rebalse" y "Ver mapa", contadores, cómo reportar) | `index.html` |
 | Reportar un rebalse (basado en la Ficha de Registro de Rebalse) | `reportar.html` |
 | Mapa de puntos críticos (filtros por junta, fecha y tipo) | `mapa.html` |
 | El problema (las dos redes y por qué una afecta a la otra) | `problema.html` |
 | Historia 2001–2026 | `historia.html` |
-| Compromisos y seguimiento | `compromisos.html` |
 | Documentos | `documentos.html` |
 | Las juntas | `juntas.html` |
 
 ## Cómo actualizar el contenido
 
 Todo el contenido editable está en **`js/datos.js`**: juntas (presidente/a, contacto,
-problemas), calendario de reuniones (`REUNIONES`, las pasadas se ocultan solas), compromisos y su estado, documentos, cronología, novedades, puntos conocidos
+problemas), calendario de reuniones (`REUNIONES`, las pasadas se ocultan solas), documentos, cronología, novedades, puntos conocidos
 del mapa, correo y WhatsApp de contacto.
 
-- Estados de compromisos: `verificar`, `curso`, `cumplido`, `incumplido`.
 - Para publicar un documento, súbelo a la carpeta `documentos/` y pon su ruta en `enlace`.
   De las notas de prensa, publicar un resumen propio y el enlace, no el escaneo completo.
 - Las coordenadas de `PUNTOS_CONOCIDOS` son aproximadas: verificarlas.
@@ -114,7 +112,7 @@ muestran en el mapa, se borran (botón "Borrar", no se puede deshacer) y se desc
 ## Administración
 
 - Un administrador general y un editor por junta (por ahora comparten la `ADMIN_CLAVE`; el panel filtra por junta).
-- Compromisos y documentos se actualizan después de cada reunión de la mesa.
+- Los documentos se actualizan después de cada reunión de la mesa.
 - Respaldo mensual de los reportes: botón "Descargar planilla" en `/admin.html`, porque son evidencia.
 
 ## Pendientes

@@ -390,3 +390,47 @@ fieldset { border: 2px solid var(--borde); border-radius: var(--radio); padding:
 .reunion p { margin: 0 0 8px; }
 .reunion svg.icono { color: var(--azul); }
 a[href^="tel:"] { white-space: nowrap; }
+
+/* ---------- Inicio como app para reportar ---------- */
+.portada-app { padding: 44px 0 52px; }
+.acciones-portada {
+  display: flex; flex-direction: column; gap: 14px;
+  max-width: 30rem; margin: 0 auto;
+}
+.boton-app {
+  justify-content: center; gap: 10px; width: 100%;
+  font-size: 1.25rem; padding: 18px 24px; min-height: 64px;
+  box-shadow: 0 6px 20px rgba(11, 42, 85, .25);
+}
+.boton-app svg.icono { width: 1.4em; height: 1.4em; }
+.portada-app + section .contador .numero { font-size: 2.4rem; }
+@media (max-width: 899px) { .grilla-3#contadores { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+
+.pasos {
+  counter-reset: paso; list-style: none; padding: 0; margin: 0 auto 20px; max-width: 40rem;
+  display: grid; gap: 12px;
+}
+.pasos li {
+  counter-increment: paso; display: flex; align-items: flex-start; gap: 14px;
+  background: #fff; border: 1px solid var(--borde); border-radius: var(--radio);
+  padding: 16px 18px; box-shadow: var(--sombra);
+}
+.pasos li::before {
+  content: counter(paso); flex-shrink: 0;
+  width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center;
+  background: var(--azul); color: #fff; font-weight: 800;
+}
+#en-que-vamos + .alt .aviso { max-width: 40rem; margin: 0 auto; }
+
+.enlaces-info {
+  list-style: none; padding: 0; margin: 0 auto; max-width: 40rem;
+  display: grid; gap: 10px; grid-template-columns: 1fr;
+}
+@media (min-width: 700px) { .enlaces-info { grid-template-columns: 1fr 1fr; } }
+.enlaces-info a {
+  display: flex; align-items: center; min-height: 52px; padding: 12px 16px;
+  border: 1px solid var(--borde); border-radius: var(--radio); background: #fff;
+  color: var(--azul-noche); font-weight: 700; text-decoration: none;
+}
+.enlaces-info a::after { content: "›"; margin-left: auto; font-size: 1.4em; color: var(--azul); }
+.enlaces-info a:hover { background: var(--azul-claro); }

@@ -3,85 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sector Collao - Concepción · Unión de Juntas de Vecinos del Sector Collao</title>
-  <meta name="description" content="Las 12 juntas de vecinos de Collao, Concepción, unidas para resolver el problema de alcantarillado y aguas lluvias del sector.">
+  <title>Reporta un rebalse · Sector Collao - Concepción</title>
+  <meta name="description" content="Reporta los rebalses de alcantarillado y aguas lluvias del sector Collao, Concepción, desde tu celular. Cada reporte queda como evidencia.">
+  <meta name="theme-color" content="#0a56a8">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
   <header id="encabezado"></header>
 
   <main id="contenido">
-    <section class="portada">
+    <section class="portada portada-app">
       <div class="contenedor">
         <div class="encabezado-portada">
-          <h1>¿Qué necesitas?</h1>
-          <p class="bajada">Las 12 juntas de vecinos de Collao trabajamos unidas para solucionar los rebalses de alcantarillado y las inundaciones por aguas lluvias.</p>
+          <h1>¿Viste un rebalse?</h1>
+          <p class="bajada">Repórtalo desde tu celular en 2 minutos. Cada reporte queda como evidencia ante Essbio y las autoridades.</p>
         </div>
-
-        <div class="bloques">
-          <article class="bloque urgente">
-            <div class="bloque-titulo">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6 4 40h40L24 6z"/><path d="M24 19v9M24 34h.01"/></svg>
-              <h2>Reportar</h2>
-            </div>
-            <ul>
-              <li><a href="reportar.html">Reportar un rebalse</a></li>
-              <li><a href="mapa.html">Mapa de puntos críticos</a></li>
-            </ul>
-            <a class="mas" href="reportar.html" aria-label="Más sobre reportar">Más</a>
-          </article>
-
-          <article class="bloque">
-            <div class="bloque-titulo">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="19"/><path d="M24 22v12M24 15h.01"/></svg>
-              <h2>Información</h2>
-            </div>
-            <ul>
-              <li><a href="problema.html">El problema, explicado simple</a></li>
-              <li><a href="historia.html">Historia 2001–2026</a></li>
-              <li><a href="documentos.html">Documentos</a></li>
-            </ul>
-            <a class="mas" href="problema.html" aria-label="Más información">Más</a>
-          </article>
-
-          <article class="bloque">
-            <div class="bloque-titulo">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="7" width="28" height="35" rx="3"/><path d="M18 7h12v5H18zM16 22l3 3 6-6M16 33h16"/></svg>
-              <h2>Seguimiento</h2>
-            </div>
-            <ul>
-              <li><a href="compromisos.html">Compromisos de Essbio, SERVIU, DOH y el municipio</a></li>
-              <li><a href="#en-que-vamos">En qué vamos</a></li>
-            </ul>
-            <a class="mas" href="compromisos.html" aria-label="Más sobre el seguimiento">Más</a>
-          </article>
-
-          <article class="bloque">
-            <div class="bloque-titulo">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="16" r="6"/><path d="M6 40a11 11 0 0 1 22 0"/><circle cx="33" cy="18" r="5"/><path d="M30 29a9 9 0 0 1 12 9"/></svg>
-              <h2>Participar</h2>
-            </div>
-            <ul>
-              <li><a href="juntas.html">Las juntas de vecinos</a></li>
-              <li><a href="juntas.html#calendario">Calendario de reuniones</a></li>
-            </ul>
-            <a class="mas" href="juntas.html" aria-label="Más sobre participar">Más</a>
-          </article>
+        <div class="acciones-portada">
+          <a class="boton boton-rebalse boton-app" href="reportar.html">
+            <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>
+            Reportar un rebalse
+          </a>
+          <a class="boton boton-secundario boton-app" href="mapa.html">
+            <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            Ver mapa de rebalses
+          </a>
         </div>
-
-        <p class="meta-portada"><strong>Meta:</strong> resolver el problema de alcantarillado y aguas lluvias en 12 meses, de octubre 2026 a septiembre 2027.</p>
       </div>
     </section>
 
     <section id="en-que-vamos">
       <div class="contenedor">
+        <div id="contadores" class="grilla grilla-3" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="contenedor">
         <div class="titulo-seccion">
-          <h2>En qué vamos</h2>
-          <span class="divisor" aria-hidden="true"></span>
-          <a class="pildora" href="mapa.html">Ver mapa</a>
+          <h2>Cómo reportar</h2>
         </div>
-        <div id="contadores" class="grilla grilla-4" aria-live="polite"></div>
-        <p class="aviso aviso-info">Cada rebalse que reportas se convierte en evidencia. Así ninguna institución puede decir que son casos aislados.</p>
+        <ol class="pasos">
+          <li><strong>Marca el lugar</strong> en el mapa o con tu ubicación.</li>
+          <li><strong>Cuenta qué pasó:</strong> qué rebalsó y si estaba lloviendo.</li>
+          <li><strong>Agrega fotos o un video</strong> y envía.</li>
+        </ol>
+        <p class="aviso aviso-info">Reporta también los rebalses en días secos: son la prueba de que la red está fallando y no es solo por la lluvia.</p>
       </div>
     </section>
 
@@ -96,28 +64,17 @@
       </div>
     </section>
 
-    <section class="alt">
-      <div class="contenedor">
-        <div class="titulo-seccion">
-          <h2>Noticias</h2>
-          <span class="divisor" aria-hidden="true"></span>
-          <a class="pildora" href="historia.html">Más</a>
-        </div>
-        <div id="novedades" class="grilla grilla-2"></div>
-      </div>
-    </section>
-
     <section>
       <div class="contenedor">
         <div class="titulo-seccion">
-          <h2>Nuestros objetivos</h2>
+          <h2>Más información</h2>
         </div>
-        <div class="grilla grilla-2">
-          <div class="tarjeta"><h3>Informar con datos</h3><p>Documentos y cifras, no rumores.</p></div>
-          <div class="tarjeta"><h3>Registrar cada rebalse</h3><p>Con fecha, lugar y fotos, para tener un catastro que nadie pueda negar.</p></div>
-          <div class="tarjeta"><h3>Seguir los compromisos</h3><p>Lo que prometen Essbio, SERVIU, DOH y el municipio queda público, con fecha y estado.</p></div>
-          <div class="tarjeta"><h3>Hablar con una sola voz</h3><p>12 juntas de vecinos por cerca de 35 mil habitantes de Collao.</p></div>
-        </div>
+        <ul class="enlaces-info">
+          <li><a href="problema.html">El problema, explicado simple</a></li>
+          <li><a href="historia.html">Historia 2001–2026</a></li>
+          <li><a href="documentos.html">Documentos</a></li>
+          <li><a href="juntas.html">Las juntas de vecinos</a></li>
+        </ul>
       </div>
     </section>
   </main>
@@ -127,13 +84,6 @@
   <script src="js/datos.js"></script>
   <script src="js/comun.js"></script>
   <script>
-    document.getElementById("novedades").innerHTML = NOVEDADES.map((n) => `
-      <article class="tarjeta">
-        <p class="etiqueta-nota">${escaparHTML(n.fecha)}</p>
-        <h3>${escaparHTML(n.titulo)}</h3>
-        <p>${escaparHTML(n.texto)}</p>
-      </article>`).join("");
-
     const proxima = proximasReuniones()[0];
     if (proxima) {
       document.getElementById("proxima-reunion").innerHTML = tarjetaReunion(proxima);

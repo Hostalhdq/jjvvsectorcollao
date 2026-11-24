@@ -1,0 +1,14 @@
+{
+  "name": "Rebalses Sector Collao",
+  "short_name": "Rebalses Collao",
+  "description": "Reporta los rebalses de alcantarillado y aguas lluvias del sector Collao, Concepción.",
+  "lang": "es-CL",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a56a8",
+  "icons": [
+    { "src": "/img/icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
