@@ -411,7 +411,7 @@ a[href^="tel:"] { white-space: nowrap; }
   display: grid; gap: 12px;
 }
 .pasos li {
-  counter-increment: paso; display: flex; align-items: flex-start; gap: 14px;
+  counter-increment: paso; display: flex; align-items: center; gap: 14px;
   background: #fff; border: 1px solid var(--borde); border-radius: var(--radio);
   padding: 16px 18px; box-shadow: var(--sombra);
 }
