@@ -105,7 +105,7 @@ if (typeof L !== "undefined") {
   mapa.on("click", (e) => marcar(e.latlng.lat, e.latlng.lng));
 } else {
   document.getElementById("mapa-reporte").outerHTML =
-    '<p class="ayuda">El mapa no se pudo cargar. Usa el botón de ubicación o basta con la dirección.</p>';
+    '<p class="ayuda">El mapa no se pudo cargar. Basta con la dirección.</p>';
 }
 
 function marcar(lat, lng) {
@@ -114,19 +114,6 @@ function marcar(lat, lng) {
   if (marcador) marcador.setLatLng([lat, lng]);
   else marcador = L.marker([lat, lng]).addTo(mapa);
 }
-
-document.getElementById("mi-ubicacion").addEventListener("click", () => {
-  if (!navigator.geolocation) return alert("Tu teléfono no permite compartir la ubicación. Toca el mapa para marcar el punto.");
-  navigator.geolocation.getCurrentPosition(
-    (p) => {
-      marcar(p.coords.latitude, p.coords.longitude);
-      if (mapa) mapa.setView([p.coords.latitude, p.coords.longitude], 17);
-      else alert("Ubicación guardada.");
-    },
-    () => alert("No pudimos obtener tu ubicación. Toca el mapa para marcar el punto."),
-    { enableHighAccuracy: true, timeout: 10000 }
-  );
-});
 
 function validar() {
   const errores = [];
